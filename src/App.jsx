@@ -1,13 +1,14 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Sidebar from './components/Slidebar/Sidebar'
 import Main from './components/Main/Main'
+import { addTask, getResponse } from './store/ResponseSlice'
 
 function App() {
-  
 
+  
   return (
-    <section className='max-h-screen bg-Gray flex'>
+    <section className='h-full bg-Gray flex'>
         <Sidebar />
         <Main />
     </section>

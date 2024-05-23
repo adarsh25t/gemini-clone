@@ -14,7 +14,7 @@ function Sidebar() {
   const [sidebar, setSidebar] = useState(false)
 
   return (
-    <div className={`p-5 h-screen ${sidebar ? 'w-80' : 'w-20'} bg-Dark transition-all duration-300 flex flex-col justify-between space-y-10`}>
+    <div className={`p-5 h-[calc(100vh-50px)] ${sidebar ? 'w-80' : 'w-20'} bg-Dark transition-all duration-300 flex flex-col justify-between space-y-10`}>
 
       <div className="space-y-10">
         <div className="hover:bg-zinc-900 transition-all duration-300 rounded-full p-2 w-fit" onClick={() => setSidebar(!sidebar)}>
