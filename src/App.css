@@ -16,3 +16,20 @@ body {
     background-clip: text;
     text-fill-color: transparent;
 }
+
+.result-div {
+    height: 70vh;
+    overflow-y: scroll;
+}
+.result-div::-webkit-scrollbar {
+    display: none;
+}
+
+.result-div p{
+    color: #d3d3d3;
+    font-weight: 500;
+}
+.result-div p b {
+    color: #f1f1f1;
+    font-weight: 500;
+}

@@ -15,6 +15,7 @@ export const getResponse = createAsyncThunk('/getresponse',async(req,res) => {
 })
 
 
+
 export const responseSlice = createSlice({
     name: "response",
     initialState,
@@ -31,7 +32,22 @@ export const responseSlice = createSlice({
             state.respose.status = "pending";
         })
         builder.addCase(getResponse.fulfilled,(state, action) => {
-            state.respose.text = action.payload;
+            const responseArray = action.payload.split("**");
+            let newResponse;
+
+            for (let i = 0; i < responseArray.length; i++) {
+                const element = responseArray[i];
+                
+                if(i === 0 || i%2 !== 1) {
+                    newResponse += element;
+                }
+                else {
+                    newResponse += "<b>" + element + "</b>";
+                }
+            }
+
+            const response2 = newResponse.split("*").join("<br/>");
+            state.respose.text = response2;
             state.respose.status = "completed";
         })
     }
