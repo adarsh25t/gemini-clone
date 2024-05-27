@@ -5,12 +5,13 @@ import { run } from "../Config/gemini";
 const initialState = {
     respose: {
         text: "",
-        status: "not started",
+        status: "started",
+        previoustext:[]
     }
 };
 
 export const getResponse = createAsyncThunk('/getresponse',async(req,res) => {
-    const response = await run(req)
+    const response = await run(req);
     return response.text()
 })
 
@@ -21,10 +22,10 @@ export const responseSlice = createSlice({
     initialState,
     reducers: {
         addTask: (state, action) => {
-            state.tasks.push(action.payload)
+            state.respose.previoustext.push(action.payload)
         },
-        deleteTask: (state, action) => {
-            state.tasks = state.tasks.filter(task => task.id!== action.payload)
+        changeStatus: (state, action) => {
+            state.respose.status = action.payload
         }
     },
     extraReducers:(builder) => {
@@ -33,7 +34,7 @@ export const responseSlice = createSlice({
         })
         builder.addCase(getResponse.fulfilled,(state, action) => {
             const responseArray = action.payload.split("**");
-            let newResponse;
+            let newResponse = "";
 
             for (let i = 0; i < responseArray.length; i++) {
                 const element = responseArray[i];
@@ -53,5 +54,5 @@ export const responseSlice = createSlice({
     }
 })
 
-export const { addTask, deleteTask } = responseSlice.actions;
+export const { addTask, changeStatus } = responseSlice.actions;
 export default responseSlice.reducer;
